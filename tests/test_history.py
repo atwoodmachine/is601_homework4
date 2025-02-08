@@ -13,7 +13,7 @@ def setup_test():
     Calculation_History.add_to_history(Calculation(Decimal('10'), Decimal('3'), add))
     Calculation_History.add_to_history(Calculation(Decimal('4'), Decimal('2'), subtract))
     Calculation_History.add_to_history(Calculation(Decimal('5'), Decimal('5'), multiply))
-    Calculation_History.add_to_history(Calculation(Decimal('32'), Decimal('4'), divide)) 
+    Calculation_History.add_to_history(Calculation(Decimal('32'), Decimal('4'), divide))
 
 def test_get_history(setup_test):
     '''Test get history, should return 4 from setup'''
