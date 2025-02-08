@@ -1,0 +1,28 @@
+from decimal import Decimal
+import pytest
+from calculator.calculation import Calculation
+from calculator.calculation_history import Calculation_History
+from calculator.operations import add, subtract, multiply, divide
+
+@pytest.fixture
+def setup_test():
+    Calculation_History.clear_history()
+    Calculation_History.add_to_history(Calculation(Decimal('10'), Decimal('3'), add))
+    Calculation_History.add_to_history(Calculation(Decimal('4'), Decimal('2'), subtract))
+    Calculation_History.add_to_history(Calculation(Decimal('5'), Decimal('5'), multiply))
+    Calculation_History.add_to_history(Calculation(Decimal('32'), Decimal('4'), divide))
+    
+
+def test_get_history(setup_test):
+    hist = Calculation_History.get_history()
+    assert len(hist) == 4, "Failed to get history"
+
+def test_add_to_history(setup_test):
+    calc = Calculation(Decimal('8'), Decimal('4'), multiply)
+    Calculation_History.add_to_history(calc)
+    assert Calculation_History.get_last_calculation() == calc, "Failed to add to history"
+
+def test_get_last_calc(setup_test):
+    calc = Calculation(Decimal('9'), Decimal('3'), divide)
+    Calculation_History.add_to_history(calc)
+    assert Calculation_History.get_last_calculation() == calc, "Failed get last calculation"
