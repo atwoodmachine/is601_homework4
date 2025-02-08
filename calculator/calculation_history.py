@@ -18,7 +18,7 @@ class Calculation_History:
     def get_last_calculation(cls):
         if cls.history:
             return cls.history[-1]
-        return "None"
+        return None
     
     @classmethod
     def clear_history(cls):
