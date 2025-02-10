@@ -1,7 +1,6 @@
 from calculator.calculation import Calculation
 from calculator.calculation_history import Calculation_History
 from calculator.operations import add, subtract, multiply, divide
-
 from decimal import Decimal
 from typing import Callable
 
@@ -38,4 +37,3 @@ class Calculator:
                 print(Calculator.calculate_operation(a, b, eval(operation)))
             except ValueError as e:
                 print(e)
-
