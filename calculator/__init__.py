@@ -34,5 +34,8 @@ class Calculator:
                 print(f"Unrecognized operation '{operation}'. Please enter one of: add, subtract, multiply, divide\n")
                 continue
 
-            print(Calculator.calculate_operation(a, b, eval(operation)))
+            try:
+                print(Calculator.calculate_operation(a, b, eval(operation)))
+            except ValueError as e:
+                print(e)
 
