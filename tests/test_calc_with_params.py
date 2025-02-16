@@ -34,4 +34,4 @@ def test_calculator(num1, num2, operation, expected_out):
     '''Use parameterized tests for operations'''
     calc = Calculation(num1, num2, operation)
     received = calc.calculate()
-    assert received == expected_out, f"Failed '{operation.__name__}' with '{num1}' and '{num2}', received '{received}', expected '{expected}'"
+    assert received == expected_out, f"Failed '{operation.__name__}' with '{num1}' and '{num2}', received '{received}', expected '{expected_out}'"
