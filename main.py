@@ -18,7 +18,7 @@ def calculate_and_print(a, b, operation_name):
         else:
             print(f"Unknown operation: {operation_name}")
     except InvalidOperation:
-        print(f"Invalid input: {a} or {b} is not a number")
+        print(f"Invalid input: {a} or {b} is not a valid number")
     except ZeroDivisionError:
         print(f"Math error: division by zero")
     except Exception as e:

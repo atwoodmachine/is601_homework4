@@ -4,7 +4,7 @@ import pytest
 from calculator.calculation import Calculation
 from calculator.operations import add, subtract, multiply, divide
 
-@pytest.mark.parametrize("num1, num2, operation, expected", [
+@pytest.mark.parametrize("num1, num2, operation, expected_out", [
     #Addition tests
     (Decimal('3'), Decimal('1.2'), add, Decimal('4.2')),
     (Decimal('-2'), Decimal('8'), add, Decimal('6')),
@@ -30,8 +30,8 @@ from calculator.operations import add, subtract, multiply, divide
     (Decimal('-18'), Decimal('-9'), divide, Decimal('2')),
     (Decimal('-3.2'), Decimal('-0.1'), divide, Decimal('32')),
 ])
-def test_calculator(num1, num2, operation, expected):
+def test_calculator(num1, num2, operation, expected_out):
     '''Use parameterized tests for operations'''
     calc = Calculation(num1, num2, operation)
     received = calc.calculate()
-    assert received == expected, f"Failed '{operation.__name__}' with '{num1}' and '{num2}', received '{received}', expected '{expected}'"
+    assert received == expected_out, f"Failed '{operation.__name__}' with '{num1}' and '{num2}', received '{received}', expected '{expected_out}'"
