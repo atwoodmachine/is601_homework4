@@ -1,6 +1,8 @@
+import sys
+from decimal import Decimal, InvalidOperation
 from calculator import Calculator
 
-def main():
+def calculate_and_print(a, b, operation_name):
     operation_mappings = {
         'add': Calculator.add,
         'subtract': Calculator.subtract,
@@ -8,30 +10,27 @@ def main():
         'divide': Calculator.divide
     }
 
-    print("Calculator initialized")
+    try:
+        a_decimal, b_decimal = map(Decimal, [a,b])
+        operation = operation_mappings.get(operation_name)
+        if operation:
+            print(f"Result: {a} {operation_name} {b} equals {operation(a_decimal, b_decimal)}")
+        else:
+            print(f"Unknown operation: {operation_name}")
+    except InvalidOperation:
+        print(f"Invalid input: {a} or {b} is not a number")
+    except ZeroDivisionError:
+        print(f"Math error: division by zero")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
-    while(True):
-        user_input = input("Enter an operation (add, subtract, multiply or divide) and two operands, or 'exit' to quit\n")
-
-        if user_input.lower() == "exit":
-            print("Exiting calculator")
-            break
-        
-        try:
-            operation, a, b = user_input.split()
-            a, b = float(a), float(b)
-        except ValueError:
-            print("Invalid input. Valid input format is: <operation> <operand1> <operand2>\n")
-            continue
-
-        if operation not in ("add", "subtract", "multiply", "divide"):
-            print(f"Unrecognized operation '{operation}'. Please enter one of: add, subtract, multiply, divide\n")
-            continue
-
-        try:
-            print(Calculator.calculate_operation(a, b, operation_mappings[operation]))
-        except ValueError as e:
-            print(e)
+def main():
+    if len(sys.argv) != 4:
+        print("Usage: python main.py <operand1> <operand2> <operation>")
+        sys.exit(1)
+    
+    _, a, b, operation = sys.argv
+    calculate_and_print(a, b, operation)
 
 if __name__ == "__main__":
     main()
